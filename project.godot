@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CsLearn"
-run/main_scene="uid://rjp8fd3s3f03"
+run/main_scene="uid://mucaok7dee4o"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

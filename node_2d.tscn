@@ -81,7 +81,7 @@ volume_db = -15.266
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(588, 334)
+position = Vector2(605.00006, 340)
 scale = Vector2(0.472743, 0.472743)
 texture = ExtResource("5_kdubu")
 
