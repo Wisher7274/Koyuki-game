@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=3 uid="uid://rjp8fd3s3f03"]
+
+[ext_resource type="Texture2D" uid="uid://clpt3kolmjrqo" path="res://images/f667bf33a8c3e37c5a31dce6561bd28c3546559364991093.jpg" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://dkesu15rqsw8n" path="res://script/Node2d.cs" id="1_4d7sh"]
+[ext_resource type="Script" uid="uid://dcy3lqvmnp453" path="res://script/BatLmove.cs" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://btluaew5gnoh8" path="res://script/BatRmove.cs" id="3_epypp"]
+[ext_resource type="Script" uid="uid://dxwu5w1xeutpv" path="res://script/KoyukiBall.cs" id="4_0hol4"]
+[ext_resource type="AudioStream" uid="uid://devraoel22ywu" path="res://audio/CH0198_Battle_Retire.ogg" id="5_4d7sh"]
+[ext_resource type="AudioStream" uid="uid://c8kappdt4iag2" path="res://audio/小雪鬼叫.ogg" id="5_d21ai"]
+[ext_resource type="AudioStream" uid="uid://buy1ratx3tkcc" path="res://audio/Aice room - FEEEEVER TIME.mp3" id="5_q6r6c"]
+[ext_resource type="AudioStream" uid="uid://h00mqgsn1ty" path="res://audio/biu.ogg" id="6_rj586"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(14.499939, 874.00006)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
+size = Vector2(732.7124, 628.73413)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+size = Vector2(18, 646.0001)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d21ai"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_rj586"]
+font_size = 40
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_4d7sh")
+
+[node name="BatL" type="Sprite2D" parent="."]
+position = Vector2(30, 324)
+scale = Vector2(0.03680556, 0.16666667)
+texture = ExtResource("1_0e48y")
+script = ExtResource("2_0e48y")
+
+[node name="L" type="Area2D" parent="BatL"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BatL/L"]
+position = Vector2(-4.2924805, -1)
+scale = Vector2(0.9999998, 0.9999999)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="BatR" type="Sprite2D" parent="."]
+position = Vector2(1122, 324)
+scale = Vector2(0.03680556, 0.16666667)
+texture = ExtResource("1_0e48y")
+script = ExtResource("3_epypp")
+
+[node name="R" type="Area2D" parent="BatR"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BatR/R"]
+position = Vector2(-4.2924805, -1)
+scale = Vector2(0.9999998, 0.9999999)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="KoyukiBall" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.03611111, 0.03513071)
+texture = ExtResource("1_0e48y")
+script = ExtResource("4_0hol4")
+strength = 6.0
+
+[node name="Area2D" type="Area2D" parent="KoyukiBall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KoyukiBall/Area2D"]
+position = Vector2(-0.00091552734, 0.00036621094)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="Echo" type="AudioStreamPlayer" parent="KoyukiBall"]
+stream = ExtResource("5_4d7sh")
+volume_db = -15.266
+
+[node name="Echo2" type="AudioStreamPlayer" parent="KoyukiBall"]
+stream = ExtResource("6_rj586")
+volume_db = -15.266
+
+[node name="Echo3" type="AudioStreamPlayer" parent="KoyukiBall"]
+stream = ExtResource("5_d21ai")
+volume_db = -15.266
+
+[node name="EdgeL" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeL"]
+position = Vector2(-4, 325)
+scale = Vector2(0.9999998, 0.9999999)
+shape = SubResource("RectangleShape2D_0hol4")
+
+[node name="EdgeR" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeR"]
+position = Vector2(1159, 328)
+scale = Vector2(0.9999998, 0.9999999)
+shape = SubResource("RectangleShape2D_0hol4")
+
+[node name="Score1" type="Label" parent="."]
+modulate = Color(0.99999994, 0.090442784, 0.41727456, 1)
+offset_left = 262.0
+offset_top = 10.0
+offset_right = 285.0
+offset_bottom = 65.0
+text = "0"
+label_settings = SubResource("LabelSettings_d21ai")
+horizontal_alignment = 1
+
+[node name="Score2" type="Label" parent="."]
+modulate = Color(0.96679217, 0.06513895, 0.39173627, 1)
+offset_left = 907.0
+offset_top = 11.0
+offset_right = 947.0
+offset_bottom = 34.0
+text = "0"
+label_settings = SubResource("LabelSettings_rj586")
+horizontal_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_q6r6c")
+volume_db = -25.761
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1152.0
+offset_bottom = 648.0
+metadata/_edit_lock_ = true
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 1100.0
+offset_top = 9.0
+offset_right = 1137.0
+offset_bottom = 50.0
+text = "Exit"
+
+[node name="BGMSwitch" type="CheckButton" parent="."]
+modulate = Color(1, 0.6313726, 0.9019608, 1)
+offset_left = 1013.0
+offset_top = 14.0
+offset_right = 1098.0
+offset_bottom = 45.0
+button_pressed = true
+text = "BGM"
+
+[connection signal="area_entered" from="KoyukiBall/Area2D" to="KoyukiBall" method="OnCollision"]
+[connection signal="pressed" from="ExitButton" to="." method="exit"]

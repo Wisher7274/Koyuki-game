@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcf2h0wkjp0mt"]
+
+[ext_resource type="Script" uid="uid://l3neb1jc7vbq" path="res://script/Koyuki.cs" id="1_4s6ie"]
+[ext_resource type="Script" uid="uid://cuvmphk7b8vi6" path="res://script/Dino.cs" id="1_ybb2o"]
+[ext_resource type="PackedScene" uid="uid://d2bsohqa72pdd" path="res://obstacle.tscn" id="2_qwydg"]
+[ext_resource type="Texture2D" uid="uid://bkotqtj7yen2q" path="res://images/EnemyInfo_CH0198.png" id="2_ybb2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nb2aw"]
+size = Vector2(175, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6ie"]
+size = Vector2(118, 204.5)
+
+[node name="Dino" type="Node2D"]
+script = ExtResource("1_ybb2o")
+input = ExtResource("2_qwydg")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(109.5, 644)
+shape = SubResource("RectangleShape2D_nb2aw")
+
+[node name="Koyuki" type="RigidBody2D" parent="."]
+script = ExtResource("1_4s6ie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Koyuki"]
+position = Vector2(114, 532)
+shape = SubResource("RectangleShape2D_4s6ie")
+
+[node name="Sprite2D" type="Sprite2D" parent="Koyuki"]
+position = Vector2(119, 529.00006)
+scale = Vector2(0.49557522, 0.49557522)
+texture = ExtResource("2_ybb2o")
