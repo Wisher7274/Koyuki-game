@@ -1,19 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcf2h0wkjp0mt"]
+[gd_scene load_steps=14 format=3 uid="uid://bcf2h0wkjp0mt"]
 
 [ext_resource type="Script" uid="uid://l3neb1jc7vbq" path="res://script/Koyuki.cs" id="1_4s6ie"]
 [ext_resource type="Script" uid="uid://cuvmphk7b8vi6" path="res://script/Dino.cs" id="1_ybb2o"]
-[ext_resource type="PackedScene" uid="uid://d2bsohqa72pdd" path="res://obstacle.tscn" id="2_qwydg"]
+[ext_resource type="PackedScene" uid="uid://d2bsohqa72pdd" path="res://scenes/obstacle.tscn" id="2_qwydg"]
 [ext_resource type="Texture2D" uid="uid://bkotqtj7yen2q" path="res://images/EnemyInfo_CH0198.png" id="2_ybb2o"]
+[ext_resource type="AudioStream" uid="uid://buy1ratx3tkcc" path="res://audio/Aice room - FEEEEVER TIME.mp3" id="5_7mjhv"]
+[ext_resource type="AudioStream" uid="uid://devraoel22ywu" path="res://audio/CH0198_Battle_Retire.ogg" id="5_focm0"]
+[ext_resource type="AudioStream" uid="uid://c8kappdt4iag2" path="res://audio/小雪鬼叫.ogg" id="5_mdm24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nb2aw"]
 size = Vector2(175, 20)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qwydg"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6ie"]
 size = Vector2(118, 204.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qwydg"]
+radius = 38.327538
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwydg"]
+size = Vector2(19.25, 28)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mjhv"]
+font_size = 30
+font_color = Color(1, 0.50980395, 1, 1)
 
 [node name="Dino" type="Node2D"]
 script = ExtResource("1_ybb2o")
 input = ExtResource("2_qwydg")
+MinSpawnTime = 0.6
+MaxSpawnTime = 1.0
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -22,7 +39,12 @@ position = Vector2(109.5, 644)
 shape = SubResource("RectangleShape2D_nb2aw")
 
 [node name="Koyuki" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_qwydg")
+gravity_scale = 2.174
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_4s6ie")
+strength = 680
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koyuki"]
 position = Vector2(114, 532)
@@ -32,3 +54,56 @@ shape = SubResource("RectangleShape2D_4s6ie")
 position = Vector2(119, 529.00006)
 scale = Vector2(0.49557522, 0.49557522)
 texture = ExtResource("2_ybb2o")
+
+[node name="CrashArea" type="Area2D" parent="Koyuki"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Koyuki/CrashArea"]
+position = Vector2(128, 596)
+shape = SubResource("CircleShape2D_qwydg")
+
+[node name="Jump" type="AudioStreamPlayer" parent="Koyuki"]
+stream = ExtResource("5_mdm24")
+volume_db = -10.0
+
+[node name="Lost" type="AudioStreamPlayer" parent="Koyuki"]
+stream = ExtResource("5_focm0")
+volume_db = -10.0
+
+[node name="Checkpoint" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2(36, 610)
+shape = SubResource("RectangleShape2D_qwydg")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 545.0
+offset_top = 2.0
+offset_right = 611.0
+offset_bottom = 37.0
+text = "0"
+label_settings = SubResource("LabelSettings_7mjhv")
+horizontal_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7mjhv")
+volume_db = -21.945
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="BGMSwitch" type="CheckButton" parent="."]
+modulate = Color(1, 0.6313726, 0.9019608, 1)
+offset_left = 1013.0
+offset_top = 14.0
+offset_right = 1098.0
+offset_bottom = 45.0
+button_pressed = true
+text = "BGM"
+
+[connection signal="body_entered" from="Koyuki" to="Koyuki" method="OnGround"]
+[connection signal="body_exited" from="Koyuki" to="Koyuki" method="InAir"]
+[connection signal="area_entered" from="Koyuki/CrashArea" to="." method="Crashed"]
+[connection signal="area_entered" from="Checkpoint" to="." method="Count"]

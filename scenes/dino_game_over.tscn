@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://ne6btdawsxkv"]
+
+[ext_resource type="Texture2D" uid="uid://dcdy8ts0ved8n" path="res://images/CH0198_spr_08.png" id="1_5rjep"]
+[ext_resource type="Script" uid="uid://bbmesbhg5ntvb" path="res://script/DinoGameOver.cs" id="1_i3ljo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i3ljo"]
+font_size = 28
+
+[node name="DinoGameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i3ljo")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 433.0
+offset_top = 249.0
+offset_right = 733.0
+offset_bottom = 399.0
+
+[node name="┗ T﹏T )┛" type="Sprite2D" parent="Panel"]
+position = Vector2(54.999992, 48)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("1_5rjep")
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 15.0
+offset_right = 165.0
+offset_bottom = 38.0
+text = "GameOver!"
+label_settings = SubResource("LabelSettings_i3ljo")
+
+[node name="Reply" type="Button" parent="Panel"]
+modulate = Color(0.3137255, 0.9764706, 0.38431373, 1)
+self_modulate = Color(0.3137255, 0.9764706, 0.38431373, 1)
+layout_mode = 0
+offset_left = 11.0
+offset_top = 104.0
+offset_right = 143.0
+offset_bottom = 144.0
+text = "重新开始"
+
+[node name="Exit" type="Button" parent="Panel"]
+modulate = Color(0.3137255, 0.9764706, 0.38431373, 1)
+self_modulate = Color(0.3137255, 0.9764706, 0.38431373, 1)
+layout_mode = 0
+offset_left = 150.0
+offset_top = 104.0
+offset_right = 282.0
+offset_bottom = 144.0
+text = "退出"
+
+[connection signal="pressed" from="Panel/Reply" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="Panel/Exit" to="." method="OnExitPressed"]

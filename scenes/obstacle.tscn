@@ -1,19 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2bsohqa72pdd"]
 
 [ext_resource type="Texture2D" uid="uid://dl370i40j7uqa" path="res://images/屏幕截图 2025-10-04 224023.png" id="1_aubd6"]
-[ext_resource type="Script" uid="uid://qsvj87jrjwci" path="res://script/Yuuka.cs" id="2_vcivv"]
+[ext_resource type="Script" uid="uid://cghaumakeuhi3" path="res://script/Obstacle.cs" id="1_vcivv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyhon"]
 size = Vector2(186.50427, 186.50421)
 
 [node name="Obstacle" type="Node2D"]
+script = ExtResource("1_vcivv")
 
 [node name="Yuuka" type="Sprite2D" parent="."]
 position = Vector2(1186, 602.00006)
 scale = Vector2(0.33243242, 0.33243242)
 texture = ExtResource("1_aubd6")
-script = ExtResource("2_vcivv")
-MoveSpeed = 400.0
 
 [node name="Area2D" type="Area2D" parent="Yuuka"]
 
