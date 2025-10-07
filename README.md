@@ -1,4 +1,4 @@
-# Koyuki Pong
+# Koyuki Game
 
 这是一个基于 Godot 引擎开发的简单游戏项目，包含两个小游戏：**Pong** 和 **Dino**。
 
