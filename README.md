@@ -28,7 +28,7 @@
 
 ## 如何运行
 
-1. 安装 [Godot 引擎](https://godotengine.org/)（建议使用与项目兼容的版本）。
+1. 安装 [Godot 引擎 4.5](https://godotengine.org/)。
 2. 打开 Godot，选择 `project.godot` 文件加载项目。
 3. 点击运行按钮，即可启动游戏。
 
@@ -47,4 +47,4 @@
 
 --- 
 
-如需进一步定制 README，请提供具体需求或项目描述。
+
